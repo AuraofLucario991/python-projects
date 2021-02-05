@@ -1,0 +1,77 @@
+from tkinter import *
+from tkinter.ttk import *
+
+HEIGHT = 200
+WIDTH = 200
+TITLE = "List boxes and combo boxes"
+BACKGROUND = "darkgrey"
+FONT = "Sans_Serif"
+
+class App(Frame):
+  def __init__(self, master):
+  super(App, self).__init__(master)
+  self.pack(fill=BOTH)
+  self.create_widgets()
+
+  def crete_widgets(self):
+    self.listbox = Listbox(self,selectmode=EXTENDED)
+    self.listitems = ["one", "two", "three"]
+    for i in range(len(self.listitems)):
+      self.listbox.insert(END,self.listitems[i])
+    self.listbox.pack(side=LEFT)
+    
+    self.progressbar = Progressbar(self, length=500, value=25)
+    self.progressbar.pack(side=LEFT)
+    
+    slef.increase = Button(self, text=">>>>", command=self.inc)
+    self.increase.pack(side=LEFT)
+    self.decrease = Button(self, text="<<<<", command=self.dec)
+    self.decrease.pack(side=LEFT)
+    
+    self.submit = Button(self, text="Try Me", command=self.update)
+    self.submit.pack(side=LEFT)
+    
+    self.comboitems = [1,2,3,4,5,6,7,"hi"]
+    self.combobox = Combobox(self, value=self.comboitems)
+    # self.combobox.config(value=self.comboitems)
+    self.combobox.pack(side=LEFT)
+    self.combobox.current(1)
+    
+    
+  def inc(self):
+    self.progressbar['value'] = self.progressbar['value'] +1  
+  
+  def dec(self):
+    self.progressbar['value'] = self.progressbar['value'] -1
+    
+  
+  
+  def update(self):
+    cdtext= self.comboboc.get
+    print(cdtext)
+    
+    
+    # x = self.listbox.get(ANCHOR)
+    # print(x)
+    x = ""
+    selected = self.listbox.curselection()
+    for i in selected:
+      x+=" "+self.listbox.get([i])
+      self.comboitems.append(self.listbox.get([i]))
+    self.combobox["value"]=self.comboitems
+    print(x)
+    
+    self.listbox.insert(END, cdtext)
+    
+    
+def main():
+  root = Tk()
+  # root.geometry(str.format("{}x{},WIDTH,HEGIHT))
+  root.title(TITLE)
+  root.config(bg = BACKGROUND)
+  app = App(root)
+  root.mainloop()
+  
+main()
+
+  
